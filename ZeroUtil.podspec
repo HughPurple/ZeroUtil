@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZeroUtil'
-  s.version          = '0.0.1'
+  s.version          = '0.0.3'
   s.summary          = 'ZeroUtil is an easy-to-use and powerful tools'
 
 # This description is used to generate tags and improve search results.
@@ -40,6 +40,10 @@ Pod::Spec.new do |s|
   # s.dependency 'AFNetworking', '~> 2.3'
   
   s.subspec 'Log' do |log|
-    log.source_files = 'ZeroUtil/Classes/Log/**/*'
+    log.source_files = 'ZeroUtil/Classes/Log/**/*', 'ZeroUtil/Classes/Extension/ZDate+Extension.swift', 'ZeroUtil/Classes/Extension/ZFileManager+Extension.swift', 'ZeroUtil/Classes/Extension/ZString+Extension.swift'
+  end
+  
+  s.subspec 'Extension' do |ex|
+    ex.source_files = 'ZeroUtil/Classes/Extension/**/*'
   end
 end

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZeroUtil
 
 class TableViewController: UITableViewController {
     private let viewControllers: [(type: BaseViewController.Type, title: String)] = [
@@ -32,9 +33,8 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
-        if indexPath.row < viewControllers.count {
-            let viewController = viewControllers[indexPath.row]
-            cell.textLabel?.text = viewController.title
+        if let turple = viewControllers.z[safe: indexPath.row] {
+            cell.textLabel?.text = turple.title
         } else {
             cell.textLabel?.text = "error cell!!!"
         }
@@ -42,8 +42,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < viewControllers.count {
-            let turple = viewControllers[indexPath.row]
+        if let turple = viewControllers.z[safe: indexPath.row] {
             let viewController = turple.type.init()
             viewController.title = turple.title
             navigationController?.pushViewController(viewController, animated: true)

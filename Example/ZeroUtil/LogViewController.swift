@@ -66,7 +66,7 @@ class LogViewController: BaseViewController {
     
     private func resetUI() {
         addBtn.frame.origin.x = 0
-        addBtn.frame.origin.y = navigationController?.navigationBar.frame.maxY ?? 0
+        addBtn.frame.origin.y = z.navBarFrame.maxY
         addBtn.sizeToFit()
         
         lineChangeBtn.frame.origin.x = addBtn.frame.maxX + 16
@@ -142,7 +142,7 @@ class LogViewController: BaseViewController {
     }
     
     public func fetchFile() {
-        fileUrls = FileManager.default.sortedRegularFileUrl(inDirUrl: getBaseUrl())
+        fileUrls = FileManager.default.z.sortedRegularFileUrl(inDirUrl: getBaseUrl())
         tableView.reloadData()
     }
     
@@ -168,8 +168,8 @@ extension LogViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
         
-        if indexPath.row < fileUrls.count {
-            let fileUrl = fileUrls[indexPath.row].standardizedFileURL
+        if let fileUrl = fileUrls.z[safe: indexPath.row] {
+            let fileUrl = fileUrl.standardizedFileURL
             cell.textLabel?.text = String(describing: fileUrl.path.suffix(from: getBaseUrl().path.endIndex))
         }
         
@@ -180,8 +180,8 @@ extension LogViewController: UITableViewDataSource {
 extension LogViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < fileUrls.count {
-            currentUrl = fileUrls[indexPath.row].standardizedFileURL
+        if let fileUrl = fileUrls.z[safe: indexPath.row] {
+            currentUrl = fileUrl.standardizedFileURL
             tableView.isHidden = true
             scrollView.isHidden = false
             listBtn.isHidden = false

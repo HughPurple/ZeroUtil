@@ -57,7 +57,7 @@ public final class ZLogger: NSObject {
     }
     
     public func log<T>(_ message: T, level: ZLogLevel = .info, async: Bool = true, file: String = #file, function: String = #function, line: Int = #line) {
-        let date = Date.getCurrentFormatDate()
+        let date = Date.Z.getCurrentFormatDate()
         var isUseNSLog = !disableNSLog
         if #available(iOS 10.0, *), !disableOSLog {
             os_log("%@", type: level.osLogType, createFormatLog(message, date: date, level: level, file: file, function: function, line: line))
@@ -92,39 +92,5 @@ public final class ZLogger: NSObject {
             NSLog("%@", createFormatLog(message, date: date, level: level, file: file, function: function, line: line))
         }
         handler.forEach({ $0.handle(message, date: date, level: level, file: file, function: function, line: line) })
-    }
-}
-
-public extension Date {
-    
-    static func getCurrentFormatDate(format: String = "%04d-%02d-%02d %02d:%02d:%02d.%06d %05d") -> String {
-        var tv = timeval()
-        var tz = timezone()
-        gettimeofday(&tv, &tz)
-        let tm = localtime(&tv.tv_sec).pointee
-        return String(format: format, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, tv.tv_usec, tm.tm_gmtoff)
-    }
-}
-
-public extension String {
-    
-    func isSimpleFileName(isMultiPath: Bool = false) -> Bool {
-        for item in [first?.lowercased(), last?.lowercased()] {
-            if let item = item, !((item >= "a" && item <= "z") || (item >= "0" && item <= "9")) {
-                return false
-            }
-        }
-        return allSatisfy { (char) -> Bool in
-            if char.lowercased() >= "a", char.lowercased() <= "z" {
-                return true
-            }
-            if char >= "0", char <= "9" {
-                return true
-            }
-            if char == "-" || char == "_" || (isMultiPath && char == "/") {
-                return true
-            }
-            return false
-        }
     }
 }
