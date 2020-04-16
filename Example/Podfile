@@ -2,6 +2,8 @@ use_frameworks!
 
 target 'ZeroUtil_Example' do
   pod 'ZeroUtil', :path => '../'
+  pod 'FLEX', '2.4.0'
+  pod 'SnapKit', '4.0.1'
 
   target 'ZeroUtil_Tests' do
     inherit! :search_paths

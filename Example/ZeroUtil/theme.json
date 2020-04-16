@@ -1,0 +1,63 @@
+{
+    "color_0": {
+        "type": 0,
+        "default": "161616",
+        "values": {
+            "0": [
+                "ffffff"
+            ],
+            "1": [
+                "336699"
+            ]
+        }
+    },
+    "color_1": {
+        "type": 1,
+        "default": "161616",
+        "values": {
+            "0": [
+                "991234"
+            ],
+            "1": [
+                "223456",
+                "223499"
+            ]
+        }
+    },
+    "font_0": {
+        "type": 0,
+        "default": "8",
+        "values": {
+            "0": [
+                "12P5_Myanmar Sangam MN"
+            ],
+            "1": [
+                "12.5_AmericanTypewriter"
+            ],
+            "2": [
+                "16_Baskerville"
+            ],
+            "3": [
+                "18_Charter"
+            ],
+            "4": [
+                "20_Verdana"
+            ],
+            "10003": [
+                "16_PingFangHK"
+            ]
+        }
+    },
+    "font_1": {
+        "type": 0,
+        "default": "8",
+        "values": {
+            "1": [
+                "12"
+            ],
+            "10003": [
+                "24_AvenirNext"
+            ]
+        }
+    }
+}

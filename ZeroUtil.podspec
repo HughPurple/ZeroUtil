@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZeroUtil'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = 'ZeroUtil is an easy-to-use and powerful tools'
 
 # This description is used to generate tags and improve search results.
@@ -45,5 +45,14 @@ Pod::Spec.new do |s|
   
   s.subspec 'Extension' do |ex|
     ex.source_files = 'ZeroUtil/Classes/Extension/**/*'
+  end
+  
+  s.subspec 'Theme' do |theme|
+    theme.source_files = 'ZeroUtil/Classes/Theme/**/*', 'ZeroUtil/Classes/Extension/ZArray+Extension.swift'
+  end
+  
+  s.subspec 'AutoTheme' do |autoTheme|
+    autoTheme.source_files = 'ZeroUtil/Classes/AutoTheme/**/*', 'ZeroUtil/Classes/Extension/ZUIColor+Extension.swift'
+    autoTheme.dependency 'ZeroUtil/Theme'
   end
 end

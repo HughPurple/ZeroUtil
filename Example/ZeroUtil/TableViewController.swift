@@ -8,10 +8,12 @@
 
 import UIKit
 import ZeroUtil
+import FLEX
 
 class TableViewController: UITableViewController {
     private let viewControllers: [(type: BaseViewController.Type, title: String)] = [
-        (LogViewController.self, "Test Log Feature")
+        (LogViewController.self, "Test Log Feature"),
+        (ThemeViewController.self, "Test Theme"),
     ]
     
     override func viewDidLoad() {
@@ -21,6 +23,8 @@ class TableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.separatorInset = .zero
+        
+        FLEXManager.shared()?.showExplorer()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
